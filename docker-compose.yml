@@ -1,0 +1,16 @@
+services:
+    debian-xcenv:
+        image: debian-xcenv:latest
+        container_name: debian-xcenv
+        build:
+            context: .
+        hostname: debian-xcenv
+        restart: unless-stopped
+        privileged: true
+        tty: true
+        stdin_open: true
+        network_mode: host
+        ipc: host
+        pid: host
+        volumes:
+            - "./exercises:/root/exercises"
