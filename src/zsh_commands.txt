@@ -6,7 +6,6 @@ alias clr='clear'
 alias cls='clear'
 alias wtfip='echo Your fucking IP is : $(curl -sb -H https://ipv4.wtfismyip.com/text)'
 
-
 PROMPT="
 %F{10}%M %*%f %F{8}%~%f
 %F{15}#%f "
