@@ -350,9 +350,7 @@ libxxhash0
 libyaml-0-2
 libyuv0
 libzstd1
-linux-headers-6.1.0-32-arm64
 linux-headers-6.1.0-32-common
-linux-headers-arm64
 linux-kbuild-6.1
 linux-libc-dev
 login
