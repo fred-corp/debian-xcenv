@@ -44,7 +44,7 @@ jobs:
           context: .
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: latest-${{ matrix.platform }}
       
       # - name: Build and push Docker image
       #   run: |
