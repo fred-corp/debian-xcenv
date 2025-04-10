@@ -9,6 +9,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  IMAGE_TAG: latest
+  IMAGE_VERSION: ${{ github.run_number }}
 
 
 jobs:
@@ -51,7 +53,8 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build --platform linux/${{ matrix.platform }} -t ${{ env.REGISTRY }}/${{ github.repository }}:latest-${{ matrix.platform }} .
-          docker push ${{ env.REGISTRY }}/${{ github.repository }}:${{ matrix.platform }}
+          docker push ${{ env.REGISTRY }}/${{ github.repository }}:${{ env.IMAGE_VERSION }}-${{ matrix.platform }}
+          
   
   build_multiplatform:
     runs-on: ubuntu-24.04
@@ -80,7 +83,7 @@ jobs:
         with:
           context: .
           platforms: linux/amd64,linux/arm64  # Define target architectures
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}, ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
           push: true
 
       - name: Image Pushed Successfully ✅
