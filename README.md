@@ -2,6 +2,10 @@
 
 A Debian-based Cross-Compile environment running in Docker.
 
+**Workflows :**
+
+![GitHub Workflow Status](https://github.com/fred-corp/debian-xcenv/actions/workflows/ghrc.yml/badge.svg)
+
 ## How to use
 
 Pull image on your system (replace `<architecture>` with your target architecture (amd64 or arm64)):
