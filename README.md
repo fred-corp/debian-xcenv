@@ -21,18 +21,19 @@ A Debian-based Cross-Compile environment running in Docker.
 
 ## Create a container
 
-Pull image on your system (replace `<architecture>` with your target architecture (amd64 or arm64)):
+Pull image on your system :
 
 ```zsh
-docker pull ghcr.io/fred-corp/debian-xcenv:latest-<architecture>
+docker pull ghcr.io/fred-corp/debian-xcenv
 ```
 
-Run the image (replace `<architecture>` with your target architecture (amd64 or arm64)):
+Run the image :
 
 ```zsh
-docker run -d --name debian-xcenv-depl -v ./exercises:/root/exercises --network=host --tty=true ghcr.io/fred-corp/debian-xcenv:latest-<architecture>
+docker run -d --name debian-xcenv-depl -v ./exercises:/root/exercises --network=host --tty=true ghcr.io/fred-corp/debian-xcenv
 ```
 
+> Note : You can also specify the architecture of the container by adding `:arm64` or `:amd64` to the image name.  
 > Note : This commands will mount the `exercises` folder in the current directory to `/root/exercises` in the container. You can change this path to your needs.
 
 Open a shell in the container:
