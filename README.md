@@ -4,7 +4,7 @@ A Debian-based Cross-Compile environment running in Docker.
 
 **Workflows :**
 
-![GitHub Workflow Status](https://github.com/fred-corp/debian-xcenv/actions/workflows/ghrc.yml/badge.svg)
+![GitHub Workflow Status](https://github.com/fred-corp/debian-xcenv/actions/workflows/ghcr.yml/badge.svg)
 
 ## How to use
 
