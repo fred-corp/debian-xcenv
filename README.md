@@ -1,6 +1,6 @@
 # Debian XCEnv
 
-A Debian-based Cross-Compile environment running in Docker.``
+A Debian-based Cross-Compile environment running in Docker.
 
 ## License & Acknowledgements
 
