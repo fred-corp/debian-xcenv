@@ -1,6 +1,6 @@
 # Debian XCEnv
 
-A Debian-based Cross-Compile environment running in Docker.
+A Debian-based Cross-Compile Environment running in Docker.
 
 **Workflows :**
 
@@ -122,6 +122,10 @@ tar -xf arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-linux-gnueabihf.tar.xz -C /
 
 ```zsh
 echo "PATH=/opt/arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-linux-gnueabihf/arm-gnu-toolchain-13.2.Rel1-aarch64-arm-none-linux-gnueabihf/bin/:$PATH" >> ~/.zshrc
+```
+
+```zsh
+source ~/.zshrc
 ```
 
 #### Verify the installation
