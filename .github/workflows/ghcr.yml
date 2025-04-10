@@ -51,5 +51,37 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build --platform linux/${{ matrix.platform }} -t ${{ env.REGISTRY }}/${{ github.repository }}:latest-${{ matrix.platform }} .
-          docker push ${{ env.REGISTRY }}/${{ github.repository }}:latest-${{ matrix.platform }}
+          docker push ${{ env.REGISTRY }}/${{ github.repository }}:${{ matrix.platform }}
+  
+  build_multiplatform:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
 
+    steps:
+      - name: Log into GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          install: true
+
+      - name: Build and Push Multi-Arch Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64  # Define target architectures
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          push: true
+
+      - name: Image Pushed Successfully ✅
+        run: echo "Docker image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} pushed successfully!"
