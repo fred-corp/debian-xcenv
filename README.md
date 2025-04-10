@@ -13,7 +13,7 @@ docker pull ghcr.io/fred-corp/debian-xcenv:latest-<architecture>
 Run the image (replace `<architecture>` with your target architecture (amd64 or arm64)):
 
 ```zsh
-docker run -d --name debian-xcenv-depl -v ./exercices:/root/exercices --network=host ghcr.io/fred-corp/debian-xcenv:latest-<architecture>
+docker run -d --name debian-xcenv-depl -v ./exercices:/root/exercices --network=host --tty=true ghcr.io/fred-corp/debian-xcenv:latest-<architecture>
 ```
 
 > Note : This commands will mount the `exercices` folder in the current directory to `/root/exercices` in the container. You can change this path to your needs.
