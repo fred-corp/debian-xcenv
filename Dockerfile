@@ -16,6 +16,7 @@ RUN apt update && \
     apt install -y git && \
     apt install -y zsh
 RUN xargs -a packages_list.txt apt install -y
+RUN apt install git bc bison flex libssl-dev make libc6-dev libncurses5-dev crossbuild-essential-armhf crossbuild-essential-arm64 -y
 
 # Clean up
 RUN apt clean && \
