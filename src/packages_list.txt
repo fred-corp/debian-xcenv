@@ -193,7 +193,6 @@ libgs10
 libgs10-common
 libgssapi-krb5-2
 libgstreamer1.0-0
-libharfbuzz0b
 libheif1
 libhogweed6
 libhwy1
