@@ -12,6 +12,10 @@ A Debian-based Cross-Compile environment running in Docker.
 * [Create a container](#create-a-container)
 * [Install linux tools](#install-linux-tools)
   * [Raspberry Pi](#raspberry-pi)
+    * [Beaglebone Black](#beaglebone-black)
+      * [If your host is an x86_64/amd64 machine](#if-your-host-is-an-x86_64amd64-machine)
+      * [If your host is an arm64/aarch64 machine](#if-your-host-is-an-arm64aarch64-machine)
+      * [Verify the installation](#verify-the-installation)
 * [Building the image from scratch](#building-the-image-from-scratch)
 * [License & Acknowledgements](#license--acknowledgements)
 
@@ -63,6 +67,72 @@ Then, you can build the kernel:
 
 ```zsh
 make -j$(nproc --all) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image modules dtbs
+```
+
+### Beaglebone Black
+
+If you're building for Beaglebone Black, you'll need to install the following tools and files :
+
+> From the amazing guide from [Quentin Delhaye](https://github.com/parastuffs/linux-kernel-modules/wiki)
+
+#### If your host is an x86_64/amd64 machine
+
+```zsh
+wget https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf.tar.xz
+```
+
+```zsh
+mkdir -p /opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf
+```
+
+```zsh
+chown $LOGNAME:$LOGNAME /opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf
+```
+
+```zsh
+tar -xf arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf.tar.xz -C /opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf
+```
+
+```zsh
+echo "PATH=/opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-linux-gnueabihf/bin/:$PATH" >> ~/.zshrc
+```
+
+```zsh
+source ~/.zshrc
+```
+
+#### If your host is an arm64/aarch64 machine
+
+```zsh
+wget https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-linux-gnueabihf.tar.xz
+```
+
+```zsh
+mkdir -p /opt/arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-linux-gnueabihf
+```
+
+```zsh
+chown $LOGNAME:$LOGNAME /opt/arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-linux-gnueabihf
+```
+
+```zsh
+tar -xf arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-linux-gnueabihf.tar.xz -C /opt/arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-linux-gnueabihf
+```
+
+```zsh
+echo "PATH=/opt/arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-linux-gnueabihf/arm-gnu-toolchain-13.2.Rel1-aarch64-arm-none-linux-gnueabihf/bin/:$PATH" >> ~/.zshrc
+```
+
+#### Verify the installation
+
+```zsh
+arm-none-linux-gnueabihf-gcc -v
+```
+
+You can then follow the rest of [Quentin Delhaye's guide](https://github.com/parastuffs/linux-kernel-modules/wiki/Cross-compilation-toolchain#compile-the-kernel-locally) to build the kernel.
+
+```zsh
+make -j$(nproc --all) CROSS_COMPILE=arm-none-linux-gnueabihf- ARCH=arm
 ```
 
 ## Building the image from scratch
