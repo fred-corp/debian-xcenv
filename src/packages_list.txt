@@ -196,7 +196,6 @@ libgstreamer1.0-0
 libharfbuzz0b
 libheif1
 libhogweed6
-libhwasan0
 libhwy1
 libice6
 libicu72
