@@ -48,6 +48,6 @@ jobs:
       
       - name: Build and push Docker image
         run: |
-          docker build --platform linux/${{ matrix.platform }} -t ${{ github.actor }}/${{ github.repository }}:latest-${{ matrix.platform }} .
-          docker push ${{ github.actor }}/${{ github.repository }}:latest-${{ matrix.platform }}
+          docker build --platform linux/${{ matrix.platform }} -t ${{ env.REGISTRY }}/${{ github.repository }}:latest-${{ matrix.platform }} .
+          docker push ${{ env.REGISTRY }}/${{ github.repository }}:latest-${{ matrix.platform }}
 
