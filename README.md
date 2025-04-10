@@ -53,8 +53,8 @@ If you're building for Raspberry Pi, you'll need to install the following tools 
 > From the amazing guide from [Jeff Geerling](https://www.jeffgeerling.com/blog/2020/cross-compiling-raspberry-pi-os-linux-kernel-on-macos)
 
 ```zsh
-git clone --depth=1 https://github.com/raspberrypi/linux
-cd linux
+git clone --depth=1 https://github.com/raspberrypi/linux ./rpi-linux
+cd rpi-linux
 KERNEL=kernel8
 ```
 
@@ -134,7 +134,19 @@ source ~/.zshrc
 arm-none-linux-gnueabihf-gcc -v
 ```
 
-You can then follow the rest of [Quentin Delhaye's guide](https://github.com/parastuffs/linux-kernel-modules/wiki/Cross-compilation-toolchain#compile-the-kernel-locally) to build the kernel.
+> Note : You can then follow the rest of [Quentin Delhaye's guide](https://github.com/parastuffs/linux-kernel-modules/wiki/Cross-compilation-toolchain#compile-the-kernel-locally) to build the kernel; steps should look like this :
+
+Clone the kernel source code (4.19 branch only) :
+
+```zsh
+git clone -b 4.19 --depth=1 https://github.com/beagleboard/linux.git ./bbb-linux
+```
+
+```zsh
+cd bbb-linux
+```
+
+Add a `.config` file for the kernel (you can do so by following [this step](https://github.com/parastuffs/linux-kernel-modules/wiki/Cross-compilation-toolchain#compile-the-kernel-locally)), then compile :
 
 ```zsh
 make -j$(nproc --all) CROSS_COMPILE=arm-none-linux-gnueabihf- ARCH=arm
