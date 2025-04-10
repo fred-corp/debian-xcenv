@@ -6,7 +6,7 @@ A Debian-based Cross-Compile environment running in Docker.
 
 ![GitHub Workflow Status](https://github.com/fred-corp/debian-xcenv/actions/workflows/ghcr.yml/badge.svg)
 
-## How to use
+## Create container
 
 Pull image on your system (replace `<architecture>` with your target architecture (amd64 or arm64)):
 
@@ -26,6 +26,31 @@ Open a shell in the container:
 
 ```zsh
 docker exec -it -e "TERM=xterm-256color" debian-xcenv-depl /bin/zsh 
+```
+
+## Install linux tools
+
+Depending on your target, you'll need different linux tools.  
+For example, building for Raspberry Pi, you'll need to install the following tools :
+
+> From the amazing guide from [Jeff Geerling](https://www.jeffgeerling.com/blog/2020/cross-compiling-raspberry-pi-os-linux-kernel-on-macos)
+
+```zsh
+git clone --depth=1 https://github.com/raspberrypi/linux
+cd linux
+KERNEL=kernel8
+```
+
+Create the `.config` file for the kernel:
+
+```zsh
+make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcm2711_defconfig
+```
+
+Then, you can build the kernel:
+
+```zsh
+make -j$(nproc --all) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image modules dtbs
 ```
 
 ## Building the image from scratch
