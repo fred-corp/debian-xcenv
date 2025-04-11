@@ -10,6 +10,9 @@ A Debian-based Cross-Compile Environment running in Docker.
 
 * [Summary](#summary)
 * [Create a container](#create-a-container)
+  * [Using Docker CLI](#using-docker-cli)
+  * [Using Docker-Compose](#using-docker-compose)
+* [Open a shell in the container](#open-a-shell-in-the-container)
 * [Install linux tools](#install-linux-tools)
   * [Raspberry Pi](#raspberry-pi)
   * [Beaglebone Black](#beaglebone-black)
@@ -21,25 +24,48 @@ A Debian-based Cross-Compile Environment running in Docker.
 
 ## Create a container
 
-Pull image on your system :
+### Using Docker CLI
 
 ```zsh
-docker pull ghcr.io/fred-corp/debian-xcenv
+docker run -d --name debian-xcenv --hostname debian-xcenv -v ./exercises:/root/exercises --network=host --tty=true ghcr.io/fred-corp/debian-xcenv
 ```
 
-Run the image :
+### Using Docker-Compose
+
+YAML Example :
+
+```YAML
+services:
+    debian-xcenv:
+        image: ghcr.io/fred-corp/debian-xcenv:latest
+        container_name: debian-xcenv
+        hostname: debian-xcenv
+        restart: unless-stopped
+        privileged: true
+        tty: true
+        stdin_open: true
+        network_mode: host
+        ipc: host
+        pid: host
+        volumes:
+            - "./exercices:/root/exercises"
+```
+
+Then, create the container with docker-compose :
 
 ```zsh
-docker run -d --name debian-xcenv-depl -v ./exercises:/root/exercises --network=host --tty=true ghcr.io/fred-corp/debian-xcenv
+docker-compose up -d
 ```
 
 > Note : You can also specify the architecture of the container by adding `:arm64` or `:amd64` to the image name.  
-> Note : This commands will mount the `exercises` folder in the current directory to `/root/exercises` in the container. You can change this path to your needs.
+> Note : This commands will mount the `exercices` folder in the current directory to `/root/exercises` in the container. You can change this path to your needs.
 
-Open a shell in the container:
+## Open a shell in the container
+
+You can open a shell in the container using the following command :
 
 ```zsh
-docker exec -it -e "TERM=xterm-256color" debian-xcenv-depl /bin/zsh 
+docker exec -it -e "TERM=xterm-256color" debian-xcenv /bin/zsh
 ```
 
 ## Install linux tools
