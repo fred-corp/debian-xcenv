@@ -80,7 +80,13 @@ If you're building for Raspberry Pi, you'll need to install the following tools 
 
 ```zsh
 git clone --depth=1 https://github.com/raspberrypi/linux ./rpi-linux
+```
+
+```zsh
 cd rpi-linux
+```
+
+```zsh
 KERNEL=kernel8
 ```
 
@@ -102,32 +108,6 @@ If you're building for Beaglebone Black, you'll need to install the following to
 
 > From the amazing guide from [Quentin Delhaye](https://github.com/parastuffs/linux-kernel-modules/wiki)
 
-#### If your host is an x86_64/amd64 machine
-
-```zsh
-wget https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf.tar.xz
-```
-
-```zsh
-mkdir -p /opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf
-```
-
-```zsh
-chown $LOGNAME:$LOGNAME /opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf
-```
-
-```zsh
-tar -xf arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf.tar.xz -C /opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf
-```
-
-```zsh
-echo "PATH=/opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-linux-gnueabihf/bin/:$PATH" >> ~/.zshrc
-```
-
-```zsh
-source ~/.zshrc
-```
-
 #### If your host is an arm64/aarch64 machine
 
 ```zsh
@@ -148,6 +128,32 @@ tar -xf arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-linux-gnueabihf.tar.xz -C /
 
 ```zsh
 echo "PATH=/opt/arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-linux-gnueabihf/arm-gnu-toolchain-13.2.Rel1-aarch64-arm-none-linux-gnueabihf/bin/:$PATH" >> ~/.zshrc
+```
+
+```zsh
+source ~/.zshrc
+```
+
+#### If your host is an x86_64/amd64 machine
+
+```zsh
+wget https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf.tar.xz
+```
+
+```zsh
+mkdir -p /opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf
+```
+
+```zsh
+chown $LOGNAME:$LOGNAME /opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf
+```
+
+```zsh
+tar -xf arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf.tar.xz -C /opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf
+```
+
+```zsh
+echo "PATH=/opt/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-linux-gnueabihf/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-linux-gnueabihf/bin/:$PATH" >> ~/.zshrc
 ```
 
 ```zsh
