@@ -11,7 +11,6 @@ COPY /src/* .
 RUN apt update && \
     apt upgrade -y && \
     apt install -y apt-utils && \
-    apt install -y software-properties-common && \
     apt install -y curl && \
     apt install -y git && \
     apt install -y zsh
