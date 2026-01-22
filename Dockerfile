@@ -10,10 +10,7 @@ COPY /src/* .
 # Install dependencies
 RUN apt update && \
     apt upgrade -y && \
-    apt install -y apt-utils && \
-    apt install -y curl && \
-    apt install -y git && \
-    apt install -y zsh
+    apt install -y apt-utils curl git zsh wget
 RUN apt install git bc bison flex libssl-dev make libc6-dev libncurses5-dev crossbuild-essential-armhf crossbuild-essential-arm64 -y
 
 # Clean up
@@ -27,7 +24,6 @@ RUN echo "debian-xcenv" > /etc/hostname
 RUN chsh -s /bin/zsh
 
 # Install oh-my-zsh
-RUN apt install wget -y
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 # Add contents of zsh_commands.txt at the end of .zshrc
