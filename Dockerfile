@@ -10,7 +10,7 @@ COPY /src/* .
 # Install dependencies
 RUN apt update && \
     apt upgrade -y && \
-    apt install -y apt-utils curl git zsh wget
+    apt install -y apt-utils curl git zsh wget nano file g++ cpio unzip rsync bzip2
 RUN apt install git bc bison flex libssl-dev make libc6-dev libncurses5-dev crossbuild-essential-armhf crossbuild-essential-arm64 -y
 
 # Clean up

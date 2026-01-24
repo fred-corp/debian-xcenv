@@ -48,7 +48,7 @@ services:
         ipc: host
         pid: host
         volumes:
-            - "./exercices:/root/exercises"
+            - "./xcenv:/root/xcenv"
 ```
 
 Then, create the container with docker-compose :
@@ -58,7 +58,7 @@ docker-compose up -d
 ```
 
 > Note : You can also specify the architecture of the container by adding `:arm64` or `:amd64` to the image name.  
-> Note : This commands will mount the `exercices` folder in the current directory to `/root/exercises` in the container. You can change this path to your needs.
+> Note : This commands will mount the `xcenv` folder in the current directory to `/root/xcenv` in the container. You can change this path to your needs.
 
 ## Open a shell in the container
 
@@ -100,6 +100,52 @@ Then, you can build the kernel:
 
 ```zsh
 make -j$(nproc --all) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image modules dtbs
+```
+
+### Buildroot
+
+Here are the steps for creating a buildroot compilation environment. Buildroot doesn't really like to compile things in bound volumes, so we will create a folder in the home directory of the container to work in.
+
+> Inspired from [dev.to](https://dev.to/pfs/custom-linux-image-for-raspberry-pi-5-a-guide-with-buildroot-bp3) and [blaess.fr](https://www.blaess.fr/christophe/buildroot-lab/index.html)
+
+Download buildroot sources :
+
+```zsh
+mkdir -p ~/buildroot
+```
+
+```zsh
+cd ~/buildroot
+```
+
+```zsh
+git clone https://gitlab.com/buildroot.org/buildroot.git buildroot_src
+```
+
+Create a config file for your target (CM4 in this case) :
+
+```zsh
+cd buildroot_src
+```
+
+```zsh
+make O=../CM5_build raspberrypicm5io_defconfig
+```
+
+```zsh
+cd ../CM5_build
+```
+
+Then, you can build the root filesystem :
+
+```zsh
+make
+```
+
+Finally, you can copy the output files to the bound `xcenv` folder :
+
+```zsh
+cp output/* ~/xcenv/
 ```
 
 ### Beaglebone Black
