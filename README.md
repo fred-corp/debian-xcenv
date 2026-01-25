@@ -28,7 +28,7 @@ A Debian-based Cross-Compile Environment running in Docker.
 ### Using Docker CLI
 
 ```zsh
-docker run -d --name debian-xcenv --hostname debian-xcenv -v ./exercises:/root/exercises --network=host --tty=true ghcr.io/fred-corp/debian-xcenv
+docker run -d --name debian-xcenv --hostname debian-xcenv -v ./xcenv:/root/xcenv --network=host --tty=true ghcr.io/fred-corp/debian-xcenv
 ```
 
 ### Using Docker-Compose
@@ -59,7 +59,7 @@ docker-compose up -d
 ```
 
 > Note : You can also specify the architecture of the container by adding `:arm64` or `:amd64` to the image name.  
-> Note : This commands will mount the `xcenv` folder in the current directory to `/root/xcenv` in the container. You can change this path to your needs.
+> Note : This commands will mount a `xcenv` folder in the current directory to `/root/xcenv` in the container. You can change this path to your needs.
 
 ## Open a shell in the container
 
@@ -123,7 +123,7 @@ cd ~/buildroot
 git clone https://gitlab.com/buildroot.org/buildroot.git buildroot_src
 ```
 
-Create a config file for your target (CM4 in this case) :
+Create a config file for your target (CM5 in this case) :
 
 ```zsh
 cd buildroot_src
